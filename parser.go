@@ -115,6 +115,7 @@ func (opt *Options) Parse() (err error) {
 			}
 
 		case xml.EndElement:
+			opt.CurrentEle = element.Name.Local
 			funcName := fmt.Sprintf("End%s", MakeFirstUpperCase(element.Name.Local))
 			if err = callFuncByName(opt, funcName, []reflect.Value{reflect.ValueOf(element), reflect.ValueOf(opt.ProtoTree)}); err != nil {
 				return
